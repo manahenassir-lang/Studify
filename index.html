@@ -34,28 +34,29 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 /* LEFT COLUMN: SOURCE PANEL */
 .panel-left{width:42%;background:var(--surface);border-right:1px solid var(--border);padding:2rem;display:flex;flex-direction:column;gap:1.5rem;overflow-y:auto}
 
-/* RIGHT COLUMN: DISCOVERY ENGINE (SPLIT SCREEN TARGET) */
+/* RIGHT COLUMN: DISCOVERY ENGINE */
 .panel-right{width:58%;background:var(--bg);padding:2rem;display:flex;flex-direction:column;overflow-y:auto}
 
-/* BRANDING & LOGO (SAPPHIRE DEEP BLUE THEME) */
+/* BRANDING & LOGO */
 .header{display:flex;align-items:center;margin-bottom:0.5rem}
 .logo{font-size:26px;font-weight:800;letter-spacing:-0.5px;color:var(--text);display:flex;align-items:center;gap:8px}
 .logo span{color:var(--accent2);font-weight:900}
 
 /* TAB REGIONS */
 .panel-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
-.input-container{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;display:flex;flex-direction:column;gap:12px}
-.input-tabs{display:flex;gap:6px;background:var(--bg);border-radius:var(--radius-sm);padding:4px;border:1px solid var(--border)}
-.itab{flex:1;padding:10px;font-size:12px;font-weight:700;font-family:inherit;color:var(--text2);background:transparent;border:none;border-radius:var(--radius-xs);cursor:pointer;transition:all 0.2s}
+.input-container{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;display:flex;flex-direction:column;gap:12px;position:relative;z-index:10}
+.input-tabs{display:flex;gap:6px;background:var(--bg);border-radius:var(--radius-sm);padding:4px;border:1px solid var(--border);position:relative;z-index:20}
+.itab{flex:1;padding:10px;font-size:12px;font-weight:700;font-family:inherit;color:var(--text2);background:transparent;border:none;border-radius:var(--radius-xs);cursor:pointer;transition:all 0.2s;position:relative;z-index:30}
 .itab.active{background:var(--accent-light);color:var(--accent2);border:1px solid rgba(37,99,235,0.2)}
 
 /* TEXT & UPLOAD HOVERS */
+.itab-content{display:none;position:relative;z-index:15}.itab-content.active{display:block}
 textarea{width:100%;min-height:220px;border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;font-family:inherit;font-size:13.5px;color:var(--text);background:var(--bg);resize:none;outline:none;transition:all 0.2s;line-height:1.7}
 textarea:focus{border-color:var(--accent);box-shadow:0 0 12px var(--accent-glow)}
 textarea::placeholder{color:var(--text3)}
 .upload-zone{border:1.5px dashed var(--border);border-radius:var(--radius-sm);background:var(--bg);padding:3rem 1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
 .upload-zone:hover,.upload-zone.drag-over{border-color:var(--accent);background:var(--accent-light)}
-.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:40}
 .upload-icon{font-size:32px;margin-bottom:12px}
 .upload-title{font-size:14px;font-weight:700;margin-bottom:4px;color:var(--text)}
 .upload-sub{font-size:12px;color:var(--text3)}
@@ -94,7 +95,7 @@ textarea::placeholder{color:var(--text3)}
 .copy-btn{font-family:inherit;font-size:12px;padding:6px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;cursor:pointer;color:var(--text2);transition:all 0.2s;font-weight:600}
 .copy-btn:hover{background:var(--accent-light);color:var(--accent2);border-color:var(--accent)}
 
-/* MULTIPLE CHOICE TESTING STRUCT */
+/* QUIZ STYLES */
 .q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:12px}
 .q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .q-num{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;text-transform:uppercase}
@@ -115,7 +116,7 @@ textarea::placeholder{color:var(--text3)}
 .retake-btn{font-family:inherit;font-size:12px;padding:8px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-xs);cursor:pointer;color:var(--text2);font-weight:700;transition:all 0.2s}
 .retake-btn:hover{border-color:var(--accent);color:var(--accent2)}
 
-/* DIALOGUE / CHAT WRAPPERS */
+/* CHAT WRAPPERS */
 .chat-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;height:100%}
 .chat-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;background:var(--surface2)}
 .tutor-avatar{width:38px;height:38px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;color:white;font-weight:800}
@@ -136,7 +137,7 @@ textarea::placeholder{color:var(--text3)}
 .send-btn:hover:not(:disabled){background:var(--accent2)}
 .send-btn:disabled{opacity:0.3;cursor:not-allowed}
 
-/* GLOBAL EMPTY SYSTEM STATUS */
+/* NOTICES */
 .no-content-notice{text-align:center;padding:5rem 2rem;color:var(--text3);font-size:13.5px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-top:2rem}
 .no-content-notice strong{display:block;font-size:16px;color:var(--text2);margin-bottom:6px;font-weight:700}
 .spinner-wrap{text-align:center;padding:5rem 2rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
@@ -156,7 +157,6 @@ textarea::placeholder{color:var(--text3)}
 <body>
 <div class="dashboard">
 
-  <!-- LEFT SPLIT PANEL: CONTENT CONTROLS -->
   <div class="panel-left">
     <div class="header">
       <div class="logo">✦ <span>Studify</span></div>
@@ -165,14 +165,16 @@ textarea::placeholder{color:var(--text3)}
     <div class="input-container">
       <div class="panel-label">Study Content Core</div>
       <div class="input-tabs">
-        <button class="itab active" onclick="switchInput('paste')">✏️ Paste Text</button>
-        <button class="itab" onclick="switchInput('file')">📎 Upload Materials</button>
+        <button class="itab active" id="tab-paste" onclick="switchInput('paste')">✏️ Paste Text</button>
+        <button class="itab" id="tab-file" onclick="switchInput('file')">📎 Upload Materials</button>
       </div>
-      <div id="ipaste" class="itab-content">
+      
+      <div id="ipaste" class="itab-content active">
         <textarea id="pasteArea" placeholder="Drop your academic notes, articles, textbook chapters, or concepts here..." oninput="onPasteInput()"></textarea>
         <div class="word-count" id="wc">0 words</div>
       </div>
-      <div id="ifile" class="itab-content" style="display:none;">
+      
+      <div id="ifile" class="itab-content">
         <div class="upload-zone" id="dropZone" ondragover="onDrag(event)" ondragleave="onDragLeave()" ondrop="onDrop(event)">
           <input type="file" id="fileInput" accept=".pdf,image/*,.txt" multiple onchange="onFiles(event.target.files)"/>
           <div class="upload-icon">📂</div>
@@ -191,10 +193,8 @@ textarea::placeholder{color:var(--text3)}
     </div>
   </div>
 
-  <!-- RIGHT SPLIT PANEL: REALTIME DISCOVERY ENVIRONMENT -->
   <div class="panel-right">
     
-    <!-- PAGE: DETAILED SUMMARY GUIDE -->
     <div id="page-summary" class="page active">
       <button class="action-btn" id="summaryBtn" onclick="doSummary()" disabled>✦ Generate Unrestricted Study Guide</button>
       <div id="summaryErr"></div>
@@ -203,7 +203,6 @@ textarea::placeholder{color:var(--text3)}
       </div>
     </div>
 
-    <!-- PAGE: RECALL TESTING ENVIRONMENT -->
     <div id="page-quiz" class="page">
       <button class="action-btn" id="quizBtn" onclick="doQuiz()" disabled>⚡ Build Interactive Examination</button>
       <div id="quizErr"></div>
@@ -212,7 +211,6 @@ textarea::placeholder{color:var(--text3)}
       </div>
     </div>
 
-    <!-- PAGE: INTERACTIVE TUTORIAL DIALOGUE -->
     <div id="page-tutor" class="page">
       <div id="tutorArea" style="height: 100%;">
         <div class="no-content-notice"><strong>Dialogue Environment Locked</strong>Feed source documents to unlock the direct study chat router.</div>
@@ -231,20 +229,23 @@ function onPasteInput(){const t=document.getElementById('pasteArea').value.trim(
 
 function switchInput(m){
   inputMode = m;
-  document.querySelectorAll('.itab').forEach(btn => {
-    if (m === 'paste' && btn.textContent.includes('Paste')) btn.classList.add('active');
-    else if (m === 'file' && btn.textContent.includes('Upload')) btn.classList.add('active');
-    else btn.classList.remove('active');
-  });
+  
+  // Directly swap tab active states
+  document.getElementById('tab-paste').classList.toggle('active', m === 'paste');
+  document.getElementById('tab-file').classList.toggle('active', m === 'file');
+  
+  // Directly swap structural layout classes instead of inline displays to bypass z-index collisions
   const pastePanel = document.getElementById('ipaste');
   const filePanel = document.getElementById('ifile');
+  
   if (m === 'paste') {
-    pastePanel.style.display = 'block';
-    filePanel.style.display = 'none';
+    pastePanel.classList.add('active');
+    filePanel.classList.remove('active');
   } else {
-    pastePanel.style.display = 'none';
-    filePanel.style.display = 'block';
+    filePanel.classList.add('active');
+    pastePanel.classList.remove('active');
   }
+  
   updateBtns();
   tutorBuilt = false;
 }
@@ -276,8 +277,7 @@ async function callAI(system,messages){
   try{data=JSON.parse(text)}catch(e){throw new Error('Bad server response')}
   if(!r.ok)throw new Error(data.error||`Error ${r.status}`);
   const raw=data.content.map(c=>c.text||'').join('');
-  return raw.replace(/^```json\s*/,'').replace(/^
-```\s*/,'').replace(/\s*```$/,'').trim();
+  return raw.replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/\s*```$/,'').trim();
 }
 
 async function doSummary(){
@@ -289,8 +289,7 @@ async function doSummary(){
   "summary": "Provide a masterful, exceptionally thorough and exhaustive multi-paragraph academic review of this text. Break down the core theoretical paradigms, background details, historical nuances, or specialized analytical concepts present. Make it extensive and comprehensive without artificial constraints.",
   "keyPoints": [
     "Unrestricted, fully articulated key argument or concept 1 detailing deep insights and underlying implications.",
-    "Unrestricted key concept 2 breaking down operational frameworks or structural components...",
-    "Provide an exhaustive list of key concepts depending on depth."
+    "Unrestricted key concept 2 breaking down operational frameworks or structural components..."
   ],
   "keywords": ["topic1","topic2","topic3","topic4","topic5","topic6"]
 }`;
