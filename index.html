@@ -237,29 +237,48 @@ async function callAI(system,messages){
   if(!r.ok)throw new Error(data.error||`Error ${r.status}`);
   if(!data.content||!Array.isArray(data.content))throw new Error('Unexpected response format');
   const raw=data.content.map(c=>c.text||'').join('');
-  return raw.replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/\s*```$/,'').trim();
+  return raw.replace(/^```json\s*/,'').replace(/^
+```\s*/,'').replace(/\s*```$/,'').trim();
 }
+
 async function doSummary(){
-  clearEl('summaryErr');const btn=document.getElementById('summaryBtn');btn.disabled=true;btn.textContent='⌛ Generating...';
-  loading('summaryResult','Analysing your content...','Generating summary and key points');
+  clearEl('summaryErr');const btn=document.getElementById('summaryBtn');btn.disabled=true;btn.textContent='⌛ Generating Detailed Summary...';
+  loading('summaryResult','Deeply analysing your content...','Extracting comprehensive overview and structured breakdowns');
   try{
-    const sys=`You are a study assistant. Respond ONLY with raw JSON — no markdown, no code blocks, no explanation.
-{"summary":"4-6 sentence overview","keyPoints":["point1","point2","point3","point4","point5"],"keywords":["k1","k2","k3","k4","k5"]}`;
-    const msgs=await buildMessages('Summarise this content for a student. Respond with raw JSON only.');
+    const sys=`You are an expert academic study assistant. Respond ONLY with raw JSON — no markdown, no code blocks, no explanation.
+{
+  "summary": "A detailed, comprehensive multi-paragraph overview of the core concepts, theories, and contexts found in the material. Do not summarize briefly; explain the material thoroughly as if writing a master textbook summary.",
+  "keyPoints": [
+    "Comprehensive, fully-fleshed-out key point 1 explaining a core concept in detail with its significance.",
+    "Comprehensive key point 2 with context...",
+    "Provide between 5 to 8 detailed, substantive key points depending on content depth."
+  ],
+  "keywords": ["topic1","topic2","topic3","topic4","topic5"]
+}`;
+    const msgs=await buildMessages('Provide a highly detailed, comprehensive academic summary of this content. Do not hold back on depth or technical nuances. Respond with raw JSON only.');
     const raw=await callAI(sys,msgs);
     const d=JSON.parse(raw);lastSummary=d;
+    
     const kp=d.keyPoints.map((p,i)=>`<li class="kp"><span class="kp-n">${i+1}</span><span>${p}</span></li>`).join('');
     const tgs=(d.keywords||[]).map(k=>`<span class="tag">${k}</span>`).join('');
+    
     document.getElementById('summaryResult').innerHTML=`
-      <div class="copy-row"><span class="result-title">Study Summary</span><button class="copy-btn" onclick="copySum()">⎘ Copy all</button></div>
+      <div class="copy-row"><span class="result-title">Comprehensive Study Guide</span><button class="copy-btn" onclick="copySum()">⎘ Copy Guide</button></div>
       <div class="result-card">
-        <div class="block"><div class="block-label">Overview</div><p class="summary-text">${d.summary}</p></div>
-        <div class="block"><div class="block-label">Key points</div><ul class="kp-list">${kp}</ul></div>
-        ${tgs?`<div class="block"><div class="block-label">Key topics</div><div class="tags">${tgs}</div></div>`:''}
+        <div class="block">
+          <div class="block-label">Detailed Overview</div>
+          <p class="summary-text" style="white-space: pre-wrap; text-align: justify; color: var(--text2); font-size: 14px; line-height: 1.8;">${d.summary}</p>
+        </div>
+        <div class="block">
+          <div class="block-label">Core Concepts Breakdown</div>
+          <ul class="kp-list">${kp}</ul>
+        </div>
+        ${tgs?`<div class="block"><div class="block-label">Key Subject Topics</div><div class="tags">${tgs}</div></div>`:''}
       </div>`;
   }catch(e){clearEl('summaryResult');setErr('summaryErr',e.message||'Something went wrong.')}
   finally{btn.disabled=false;btn.textContent='✦ Generate Summary & Key Points';updateBtns()}
 }
+
 function copySum(){if(!lastSummary)return;const t=`OVERVIEW\n${lastSummary.summary}\n\nKEY POINTS\n${lastSummary.keyPoints.map((p,i)=>`${i+1}. ${p}`).join('\n')}\n\nKEY TOPICS\n${(lastSummary.keywords||[]).join(', ')}`;navigator.clipboard.writeText(t).then(()=>{const b=document.querySelector('.copy-btn');if(b){b.textContent='✓ Copied!';setTimeout(()=>b.textContent='⎘ Copy all',2000)}})}
 async function doQuiz(){
   clearEl('quizErr');quizData=null;quizAnswers={};quizSubmitted=false;
