@@ -27,14 +27,6 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);min-he
 .page{display:none}.page.active{display:block}
 .content-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.5rem}
 .panel-label{font-size:12px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
-.api-row{display:flex;gap:8px;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:12px}
-.api-label{font-size:12px;font-weight:600;color:var(--text2);white-space:nowrap}
-.api-input{flex:1;border:none;background:transparent;font-family:'Sora',sans-serif;font-size:13px;color:var(--text);outline:none}
-.api-input::placeholder{color:var(--text3)}
-.api-toggle{background:none;border:none;cursor:pointer;font-size:14px;color:var(--text3);padding:2px 4px}
-.api-hint{font-size:11px;color:var(--text3);margin-bottom:12px}
-.api-hint a{color:var(--accent-mid);text-decoration:none}
-.api-hint a:hover{text-decoration:underline}
 .input-tabs{display:flex;gap:4px;background:var(--surface2);border-radius:var(--radius-sm);padding:3px;margin-bottom:10px}
 .itab{flex:1;padding:7px;font-size:12px;font-weight:600;font-family:'Sora',sans-serif;color:var(--text2);background:transparent;border:none;border-radius:5px;cursor:pointer;transition:all 0.15s}
 .itab.active{background:var(--surface);color:var(--accent)}
@@ -140,15 +132,7 @@ textarea::placeholder{color:var(--text3)}
   </div>
 
   <div class="content-panel">
-    <div class="panel-label">API Key</div>
-    <div class="api-row">
-      <span class="api-label">🔑</span>
-      <input class="api-input" id="apiKey" type="password" placeholder="Paste your Anthropic API key here (sk-ant-...)" oninput="saveKey()"/>
-      <button class="api-toggle" onclick="toggleKey()" id="keyToggle">👁</button>
-    </div>
-    <div class="api-hint">Get a free key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> → API Keys. It's saved in your browser, never sent anywhere else.</div>
-
-    <div class="panel-label" style="margin-top:4px">Your study content</div>
+    <div class="panel-label">Your study content</div>
     <div class="input-tabs">
       <button class="itab active" onclick="switchInput('paste')">✏️ Paste text</button>
       <button class="itab" onclick="switchInput('file')">📎 Upload file</button>
@@ -202,34 +186,13 @@ let isSending=false;
 let lastSummary=null;
 let tutorBuilt=false;
 
-// Load saved key
-window.addEventListener('DOMContentLoaded',()=>{
-  const k=localStorage.getItem('studify_key');
-  if(k) document.getElementById('apiKey').value=k;
-  updateBtns();
-});
-
-function saveKey(){
-  const k=document.getElementById('apiKey').value.trim();
-  if(k) localStorage.setItem('studify_key','');
-  localStorage.setItem('studify_key',k);
-  updateBtns();
-}
-
-function toggleKey(){
-  const inp=document.getElementById('apiKey');
-  inp.type=inp.type==='password'?'text':'password';
-}
-
-function getKey(){return document.getElementById('apiKey').value.trim()}
-
 function hasContent(){
   if(inputMode==='paste') return document.getElementById('pasteArea').value.trim().length>=30;
   return uploadedFiles.length>0;
 }
 
 function updateBtns(){
-  const ok=hasContent()&&getKey().length>10;
+  const ok=hasContent();
   document.getElementById('summaryBtn').disabled=!ok;
   document.getElementById('quizBtn').disabled=!ok;
 }
@@ -299,14 +262,12 @@ async function buildMessages(prompt){
 }
 
 async function callClaude(system,messages){
-  const key=getKey();
-  if(!key) throw new Error('Please enter your API key first.');
-  const r=await fetch('https://api.anthropic.com/v1/messages',{
+  const r=await fetch('/api/chat',{
     method:'POST',
-    headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-allow-browser':'true'},
-    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system,messages})
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({system,messages})
   });
-  if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error?.message||`API error ${r.status}`)}
+  if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error?.message||`Error ${r.status}`)}
   const d=await r.json();
   return d.content.map(c=>c.text||'').join('').replace(/```json\n?|```/g,'').trim();
 }
@@ -444,14 +405,12 @@ async function sendChat(){
       parts.push({type:'text',text:msg});
       apiMsgs=[{role:'user',content:parts}];
     } else { apiMsgs=chatHistory; }
-    const key=getKey();
-    if(!key) throw new Error('Please enter your API key.');
-    const r=await fetch('https://api.anthropic.com/v1/messages',{
+    const r=await fetch('/api/chat',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-allow-browser':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:apiMsgs})
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({system:sys,messages:apiMsgs})
     });
-    if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error?.message||'API error')}
+    if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error?.message||'Error')}
     const d=await r.json();
     const reply=d.content.map(c=>c.text||'').join('');
     chatHistory.push({role:'assistant',content:reply});
