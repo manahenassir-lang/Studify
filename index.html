@@ -269,7 +269,7 @@ async function callClaude(system,messages){
   });
   if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error?.message||`Error ${r.status}`)}
   const d=await r.json();
-  return d.content.map(c=>c.text||'').join('').replace(/```json\n?|```/g,'').trim();
+  return (d.content||[]).map(c=>c.text||'').join('').replace(/```json\n?|```/g,'').trim();
 }
 
 async function doSummary(){
@@ -412,7 +412,7 @@ async function sendChat(){
     });
     if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error?.message||'Error')}
     const d=await r.json();
-    const reply=d.content.map(c=>c.text||'').join('');
+    const reply=(d.content||[]).map(c=>c.text||'').join('');
     chatHistory.push({role:'assistant',content:reply});
     document.getElementById(typingId)?.remove();
     appendMsg('bot',reply);
