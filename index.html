@@ -4,121 +4,151 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Studify</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F7F5F0;--surface:#FFFFFF;--surface2:#F0EDE6;--border:#E2DED6;
-  --text:#1A1A18;--text2:#6B6860;--text3:#9E9B94;
-  --accent:#2A5C45;--accent-light:#E1F5EE;--accent-mid:#1D9E75;
-  --danger:#A32D2D;--danger-light:#FCEBEB;
-  --success:#27500A;--success-light:#EAF3DE;
-  --radius:12px;--radius-sm:8px;
+  --bg:#0D0D12;
+  --surface:#13131A;
+  --surface2:#1C1C27;
+  --surface3:#242433;
+  --border:#2A2A3D;
+  --text:#F0EFF8;
+  --text2:#9B99B8;
+  --text3:#5C5A7A;
+  --accent:#8B5CF6;
+  --accent2:#A78BFA;
+  --accent-light:#1E1535;
+  --accent-glow:rgba(139,92,246,0.15);
+  --danger:#F43F5E;
+  --danger-light:#1F0A10;
+  --success:#10B981;
+  --success-light:#061F14;
+  --radius:14px;--radius-sm:10px;--radius-xs:7px;
 }
-body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-.app{max-width:860px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
-.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
-.logo{font-family:'DM Serif Display',serif;font-size:26px;color:var(--accent);letter-spacing:-0.5px}
-.logo span{color:var(--text)}
-.badge{font-size:11px;background:var(--accent-light);color:var(--accent-mid);padding:3px 10px;border-radius:20px;font-weight:600;letter-spacing:0.5px}
-.nav{display:flex;gap:4px;background:var(--surface2);border-radius:var(--radius-sm);padding:4px;margin-bottom:1.5rem}
-.nav-btn{flex:1;padding:9px 10px;font-size:13px;font-weight:600;font-family:'Sora',sans-serif;color:var(--text2);background:transparent;border:none;border-radius:6px;cursor:pointer;transition:all 0.15s}
-.nav-btn.active{background:var(--surface);color:var(--accent);box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
+.app{max-width:880px;margin:0 auto;padding:2rem 1.5rem 5rem}
+
+/* HEADER */
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.logo{font-size:24px;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,#A78BFA,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.badge{font-size:11px;background:var(--accent-light);color:var(--accent2);padding:4px 12px;border-radius:20px;font-weight:700;letter-spacing:0.5px;border:1px solid rgba(139,92,246,0.3)}
+
+/* NAV */
+.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:1.5rem}
+.nav-btn{padding:11px;font-size:13px;font-weight:700;font-family:'Inter',sans-serif;color:var(--text2);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.15s;letter-spacing:0.3px}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent2)}
+.nav-btn.active{background:var(--accent-light);color:var(--accent2);border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow)}
 .page{display:none}.page.active{display:block}
-.content-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.5rem}
-.panel-label{font-size:12px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
-.input-tabs{display:flex;gap:4px;background:var(--surface2);border-radius:var(--radius-sm);padding:3px;margin-bottom:10px}
-.itab{flex:1;padding:7px;font-size:12px;font-weight:600;font-family:'Sora',sans-serif;color:var(--text2);background:transparent;border:none;border-radius:5px;cursor:pointer;transition:all 0.15s}
-.itab.active{background:var(--surface);color:var(--accent)}
+
+/* CONTENT PANEL */
+.content-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem}
+.panel-label{font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
+.input-tabs{display:flex;gap:4px;background:var(--bg);border-radius:var(--radius-xs);padding:3px;margin-bottom:12px;border:1px solid var(--border)}
+.itab{flex:1;padding:8px;font-size:12px;font-weight:700;font-family:'Inter',sans-serif;color:var(--text3);background:transparent;border:none;border-radius:6px;cursor:pointer;transition:all 0.15s;letter-spacing:0.3px}
+.itab.active{background:var(--surface2);color:var(--accent2)}
 .itab-content{display:none}.itab-content.active{display:block}
-textarea{width:100%;min-height:140px;border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;font-family:'Sora',sans-serif;font-size:13px;color:var(--text);background:var(--surface);resize:vertical;outline:none;transition:border-color 0.2s;line-height:1.6}
-textarea:focus{border-color:var(--accent-mid)}
+textarea{width:100%;min-height:150px;border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;font-family:'Inter',sans-serif;font-size:13px;color:var(--text);background:var(--bg);resize:vertical;outline:none;transition:border-color 0.2s;line-height:1.7}
+textarea:focus{border-color:var(--accent)}
 textarea::placeholder{color:var(--text3)}
-.upload-zone{border:1.5px dashed var(--border);border-radius:var(--radius);background:var(--surface);padding:2rem;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;position:relative}
-.upload-zone:hover,.upload-zone.drag-over{border-color:var(--accent-mid);background:var(--accent-light)}
+.upload-zone{border:1.5px dashed var(--border);border-radius:var(--radius-sm);background:var(--bg);padding:2.5rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
+.upload-zone:hover,.upload-zone.drag-over{border-color:var(--accent);background:var(--accent-light)}
 .upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.upload-icon{width:44px;height:44px;background:var(--accent-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:20px}
-.upload-title{font-size:14px;font-weight:600;margin-bottom:4px;color:var(--text)}
+.upload-icon{font-size:28px;margin-bottom:10px}
+.upload-title{font-size:14px;font-weight:700;margin-bottom:4px;color:var(--text)}
 .upload-sub{font-size:12px;color:var(--text3)}
-.upload-sub strong{color:var(--accent-mid);font-weight:600}
+.upload-sub strong{color:var(--accent2);font-weight:600}
 .file-list{display:flex;flex-direction:column;gap:6px;margin-top:10px}
-.file-item{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px}
-.file-name{flex:1;font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.file-item{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-xs);padding:10px 14px}
+.file-name{flex:1;font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
 .file-size{font-size:11px;color:var(--text3)}
 .remove-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px;padding:2px 6px;border-radius:4px;transition:color 0.15s}
 .remove-btn:hover{color:var(--danger)}
-.word-count{font-size:11px;color:var(--text3);text-align:right;margin-top:5px}
-.action-btn{width:100%;padding:13px;background:var(--accent);color:white;border:none;border-radius:var(--radius-sm);font-family:'Sora',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background 0.2s,transform 0.1s;margin-top:1.2rem}
-.action-btn:hover:not(:disabled){background:#1D4A36}
-.action-btn:active:not(:disabled){transform:scale(0.99)}
-.action-btn:disabled{opacity:0.5;cursor:not-allowed}
-.spinner-wrap{text-align:center;padding:2.5rem}
-.spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--accent-mid);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px}
+.word-count{font-size:11px;color:var(--text3);text-align:right;margin-top:6px;font-weight:500}
+
+/* BUTTONS */
+.action-btn{width:100%;padding:14px;background:linear-gradient(135deg,#7C3AED,#A855F7);color:white;border:none;border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:all 0.2s;margin-top:1.25rem;letter-spacing:0.3px;box-shadow:0 4px 20px rgba(139,92,246,0.3)}
+.action-btn:hover:not(:disabled){background:linear-gradient(135deg,#6D28D9,#9333EA);box-shadow:0 4px 30px rgba(139,92,246,0.5);transform:translateY(-1px)}
+.action-btn:active:not(:disabled){transform:translateY(0)}
+.action-btn:disabled{opacity:0.4;cursor:not-allowed;box-shadow:none}
+
+/* LOADING */
+.spinner-wrap{text-align:center;padding:3rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-top:1.25rem}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 14px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.spin-text{font-size:13px;color:var(--text2)}
+.spin-text{font-size:14px;font-weight:600;color:var(--text2)}
 .spin-sub{font-size:12px;color:var(--text3);margin-top:4px}
-.err{background:var(--danger-light);border:1px solid #F7C1C1;border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;color:var(--danger);margin-top:10px}
-.result-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:1.2rem}
-.block{padding:1.25rem;border-bottom:1px solid var(--border)}
+
+/* ERROR */
+.err{background:var(--danger-light);border:1px solid rgba(244,63,94,0.3);border-radius:var(--radius-sm);padding:12px 16px;font-size:13px;color:var(--danger);margin-top:10px;font-weight:500}
+
+/* RESULT CARDS */
+.result-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:1.25rem}
+.block{padding:1.5rem;border-bottom:1px solid var(--border)}
 .block:last-child{border-bottom:none}
-.block-label{font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--accent-mid);margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.dot{width:5px;height:5px;background:var(--accent-mid);border-radius:50%}
-.summary-text{font-size:14px;line-height:1.75;color:var(--text)}
-.kp-list{list-style:none;display:flex;flex-direction:column;gap:8px}
-.kp{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.6;color:var(--text)}
-.kp-n{min-width:20px;height:20px;background:var(--accent-light);color:var(--accent-mid);border-radius:50%;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--text2);font-weight:500}
-.copy-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.result-title{font-size:12px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--text3)}
-.copy-btn{font-family:'Sora',sans-serif;font-size:12px;padding:5px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;cursor:pointer;color:var(--text2);transition:all 0.15s}
-.copy-btn:hover{background:var(--accent-light);color:var(--accent-mid);border-color:var(--accent-mid)}
-.q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:12px}
-.q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.q-num{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.5px}
-.q-text{font-size:14px;font-weight:600;color:var(--text);margin-bottom:14px;line-height:1.5}
-.options{display:flex;flex-direction:column;gap:7px}
-.opt{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.15s;font-size:13px;color:var(--text);background:var(--surface);font-family:'Sora',sans-serif;text-align:left;width:100%}
-.opt:hover:not(:disabled){border-color:var(--accent-mid);background:var(--accent-light)}
-.opt.selected{border-color:var(--accent-mid);background:var(--accent-light)}
-.opt.correct{border-color:#3B6D11;background:var(--success-light);color:var(--success)}
-.opt.wrong{border-color:#A32D2D;background:var(--danger-light);color:var(--danger)}
-.opt.reveal-correct{border-color:#3B6D11;background:var(--success-light);color:var(--success)}
+.block-label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.block-label::before{content:'';width:3px;height:14px;background:var(--accent);border-radius:2px;display:block}
+.summary-text{font-size:14px;line-height:1.8;color:var(--text2)}
+.kp-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.kp{display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.65;color:var(--text2)}
+.kp-n{min-width:22px;height:22px;background:var(--accent-light);color:var(--accent2);border-radius:6px;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;border:1px solid rgba(139,92,246,0.3)}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-size:12px;color:var(--text2);font-weight:600}
+.copy-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;margin-top:1.25rem}
+.result-title{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text3)}
+.copy-btn{font-family:'Inter',sans-serif;font-size:12px;padding:6px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;cursor:pointer;color:var(--text2);transition:all 0.15s;font-weight:600}
+.copy-btn:hover{background:var(--accent-light);color:var(--accent2);border-color:var(--accent)}
+
+/* QUIZ */
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:10px}
+.q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.q-num{font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1px;text-transform:uppercase}
+.q-text{font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;line-height:1.5}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.15s;font-size:13px;color:var(--text2);background:var(--bg);font-family:'Inter',sans-serif;text-align:left;width:100%;font-weight:500}
+.opt:hover:not(:disabled){border-color:var(--accent);color:var(--text);background:var(--accent-light)}
+.opt.selected{border-color:var(--accent);color:var(--accent2);background:var(--accent-light)}
+.opt.correct{border-color:var(--success);background:var(--success-light);color:var(--success)}
+.opt.wrong{border-color:var(--danger);background:var(--danger-light);color:var(--danger)}
+.opt.reveal-correct{border-color:var(--success);background:var(--success-light);color:var(--success)}
 .opt:disabled{cursor:default}
-.opt-letter{min-width:20px;height:20px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--text2);flex-shrink:0}
-.opt.correct .opt-letter,.opt.reveal-correct .opt-letter{background:var(--success-light);border-color:#3B6D11;color:var(--success)}
-.opt.wrong .opt-letter{background:var(--danger-light);border-color:#A32D2D;color:var(--danger)}
-.explanation{margin-top:10px;font-size:12px;line-height:1.6;color:var(--text2);padding:10px 12px;background:var(--surface2);border-radius:var(--radius-sm)}
-.score-bar{background:var(--surface2);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between}
-.score-num{font-size:28px;font-weight:700;color:var(--accent-mid)}
-.score-label{font-size:12px;color:var(--text2);margin-top:2px}
-.score-pct{font-size:14px;font-weight:600;color:var(--accent-mid);margin-bottom:8px;display:block}
-.retake-btn{font-family:'Sora',sans-serif;font-size:13px;padding:8px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;color:var(--text2);transition:all 0.15s;font-weight:600}
-.retake-btn:hover{border-color:var(--accent-mid);color:var(--accent-mid);background:var(--accent-light)}
+.opt-letter{min-width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;color:var(--text3);flex-shrink:0}
+.opt.correct .opt-letter,.opt.reveal-correct .opt-letter{background:var(--success-light);border-color:var(--success);color:var(--success)}
+.opt.wrong .opt-letter{background:var(--danger-light);border-color:var(--danger);color:var(--danger)}
+.opt.selected .opt-letter{background:var(--accent-light);border-color:var(--accent);color:var(--accent2)}
+.explanation{margin-top:12px;font-size:12px;line-height:1.65;color:var(--text2);padding:12px 14px;background:var(--surface2);border-radius:var(--radius-xs);border-left:3px solid var(--accent)}
+.score-bar{background:linear-gradient(135deg,var(--accent-light),var(--surface2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius);padding:1.5rem;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.score-num{font-size:36px;font-weight:900;color:var(--accent2);letter-spacing:-1px}
+.score-label{font-size:12px;color:var(--text3);margin-top:2px;font-weight:600}
+.score-pct{font-size:15px;font-weight:800;color:var(--accent2);margin-bottom:10px;display:block}
+.retake-btn{font-family:'Inter',sans-serif;font-size:12px;padding:8px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xs);cursor:pointer;color:var(--text2);transition:all 0.15s;font-weight:700}
+.retake-btn:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-light)}
+
+/* CHAT */
 .chat-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.chat-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.tutor-avatar{width:32px;height:32px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;font-weight:700;flex-shrink:0}
-.tutor-name{font-size:14px;font-weight:600;color:var(--text)}
-.tutor-sub{font-size:11px;color:var(--text3)}
-.chat-messages{padding:14px 16px;display:flex;flex-direction:column;gap:12px;min-height:300px;max-height:460px;overflow-y:auto}
-.msg{max-width:82%;display:flex;flex-direction:column;gap:4px}
+.chat-header{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;background:var(--surface2)}
+.tutor-avatar{width:36px;height:36px;background:linear-gradient(135deg,#7C3AED,#EC4899);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;color:white;font-weight:900;flex-shrink:0}
+.tutor-name{font-size:14px;font-weight:800;color:var(--text)}
+.tutor-sub{font-size:11px;color:var(--text3);font-weight:500}
+.chat-messages{padding:16px 18px;display:flex;flex-direction:column;gap:14px;min-height:320px;max-height:480px;overflow-y:auto}
+.msg{max-width:80%;display:flex;flex-direction:column;gap:5px}
 .msg.user{align-self:flex-end;align-items:flex-end}
 .msg.bot{align-self:flex-start;align-items:flex-start}
-.bubble{padding:10px 14px;border-radius:var(--radius);font-size:13px;line-height:1.65}
-.msg.user .bubble{background:var(--accent);color:white;border-bottom-right-radius:4px}
-.msg.bot .bubble{background:var(--surface2);color:var(--text);border-bottom-left-radius:4px}
-.msg-time{font-size:10px;color:var(--text3)}
-.chat-input-row{padding:12px 14px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:flex-end}
-.chat-input{flex:1;border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-family:'Sora',sans-serif;font-size:13px;color:var(--text);background:var(--surface);resize:none;outline:none;transition:border-color 0.2s;min-height:38px;max-height:120px;line-height:1.5}
-.chat-input:focus{border-color:var(--accent-mid)}
+.bubble{padding:11px 16px;border-radius:var(--radius);font-size:13px;line-height:1.7;font-weight:500}
+.msg.user .bubble{background:linear-gradient(135deg,#7C3AED,#A855F7);color:white;border-bottom-right-radius:4px}
+.msg.bot .bubble{background:var(--surface2);color:var(--text2);border-bottom-left-radius:4px;border:1px solid var(--border)}
+.msg-time{font-size:10px;color:var(--text3);font-weight:500}
+.chat-input-row{padding:14px 16px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:flex-end;background:var(--surface2)}
+.chat-input{flex:1;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;font-family:'Inter',sans-serif;font-size:13px;color:var(--text);background:var(--bg);resize:none;outline:none;transition:border-color 0.2s;min-height:40px;max-height:120px;line-height:1.5;font-weight:500}
+.chat-input:focus{border-color:var(--accent)}
 .chat-input::placeholder{color:var(--text3)}
-.send-btn{width:36px;height:36px;background:var(--accent);color:white;border:none;border-radius:var(--radius-sm);cursor:pointer;font-size:16px;transition:background 0.2s;flex-shrink:0}
-.send-btn:hover:not(:disabled){background:#1D4A36}
-.send-btn:disabled{opacity:0.4;cursor:not-allowed}
-.no-content-notice{text-align:center;padding:3rem;color:var(--text3);font-size:13px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
-.no-content-notice strong{display:block;font-size:15px;color:var(--text2);margin-bottom:6px}
-.typing-dots{display:inline-flex;gap:4px;align-items:center;padding:4px 0}
-.typing-dots span{width:6px;height:6px;background:var(--text3);border-radius:50%;animation:bounce 1.2s infinite}
+.send-btn{width:40px;height:40px;background:linear-gradient(135deg,#7C3AED,#A855F7);color:white;border:none;border-radius:var(--radius-sm);cursor:pointer;font-size:16px;transition:all 0.2s;flex-shrink:0;box-shadow:0 2px 10px rgba(139,92,246,0.3)}
+.send-btn:hover:not(:disabled){box-shadow:0 2px 20px rgba(139,92,246,0.5)}
+.send-btn:disabled{opacity:0.4;cursor:not-allowed;box-shadow:none}
+.no-content-notice{text-align:center;padding:3.5rem;color:var(--text3);font-size:13px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
+.no-content-notice strong{display:block;font-size:16px;color:var(--text2);margin-bottom:8px;font-weight:800}
+.typing-dots{display:inline-flex;gap:5px;align-items:center;padding:4px 0}
+.typing-dots span{width:7px;height:7px;background:var(--accent2);border-radius:50%;animation:bounce 1.2s infinite}
 .typing-dots span:nth-child(2){animation-delay:0.2s}
 .typing-dots span:nth-child(3){animation-delay:0.4s}
 @keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
@@ -127,11 +157,12 @@ textarea::placeholder{color:var(--text3)}
 <body>
 <div class="app">
   <div class="header">
-    <div class="logo">Studi<span>fy</span></div>
-    <span class="badge">Powered by Claude AI</span>
+    <div class="logo">✦ Studify</div>
+    <span class="badge">AI-Powered</span>
   </div>
+
   <div class="content-panel">
-    <div class="panel-label">Your study content</div>
+    <div class="panel-label">Study content</div>
     <div class="input-tabs">
       <button class="itab active" onclick="switchInput('paste')">✏️ Paste text</button>
       <button class="itab" onclick="switchInput('file')">📎 Upload file</button>
@@ -145,18 +176,20 @@ textarea::placeholder{color:var(--text3)}
         <input type="file" id="fileInput" accept=".pdf,image/*,.txt" multiple onchange="onFiles(event.target.files)"/>
         <div class="upload-icon">📂</div>
         <div class="upload-title">Drop files here or click to browse</div>
-        <div class="upload-sub">Supports <strong>PDF</strong>, <strong>images</strong> (JPG, PNG), <strong>.txt</strong></div>
+        <div class="upload-sub">Supports <strong>PDF</strong>, <strong>images</strong>, <strong>.txt</strong></div>
       </div>
       <div class="file-list" id="fileList"></div>
     </div>
   </div>
+
   <div class="nav">
     <button class="nav-btn active" id="nav-summary" onclick="goPage('summary')">📋 Summary</button>
     <button class="nav-btn" id="nav-quiz" onclick="goPage('quiz')">🧠 Quiz</button>
     <button class="nav-btn" id="nav-tutor" onclick="goPage('tutor')">💬 Tutor</button>
   </div>
+
   <div id="page-summary" class="page active">
-    <button class="action-btn" id="summaryBtn" onclick="doSummary()" disabled>✦ Generate Summary &amp; Key Points</button>
+    <button class="action-btn" id="summaryBtn" onclick="doSummary()" disabled>✦ Generate Summary & Key Points</button>
     <div id="summaryErr"></div>
     <div id="summaryResult"></div>
   </div>
@@ -169,122 +202,76 @@ textarea::placeholder{color:var(--text3)}
     <div id="tutorArea"></div>
   </div>
 </div>
+
 <script>
 let inputMode='paste',uploadedFiles=[],quizData=null,quizAnswers={},quizSubmitted=false,chatHistory=[],isSending=false,lastSummary=null,tutorBuilt=false;
 
-function hasContent(){
-  return inputMode==='paste'?document.getElementById('pasteArea').value.trim().length>=30:uploadedFiles.length>0;
-}
-function updateBtns(){
-  const ok=hasContent();
-  document.getElementById('summaryBtn').disabled=!ok;
-  document.getElementById('quizBtn').disabled=!ok;
-}
-function onPasteInput(){
-  const t=document.getElementById('pasteArea').value.trim();
-  const w=t?t.split(/\s+/).length:0;
-  document.getElementById('wc').textContent=w+' word'+(w!==1?'s':'');
-  updateBtns();tutorBuilt=false;
-}
-function switchInput(m){
-  inputMode=m;
-  document.querySelectorAll('.itab').forEach((b,i)=>b.classList.toggle('active',(i===0&&m==='paste')||(i===1&&m==='file')));
-  document.getElementById('ipaste').classList.toggle('active',m==='paste');
-  document.getElementById('ifile').classList.toggle('active',m==='file');
-  updateBtns();tutorBuilt=false;
-}
+function hasContent(){return inputMode==='paste'?document.getElementById('pasteArea').value.trim().length>=30:uploadedFiles.length>0}
+function updateBtns(){const ok=hasContent();document.getElementById('summaryBtn').disabled=!ok;document.getElementById('quizBtn').disabled=!ok}
+function onPasteInput(){const t=document.getElementById('pasteArea').value.trim();const w=t?t.split(/\s+/).length:0;document.getElementById('wc').textContent=w+' word'+(w!==1?'s':'');updateBtns();tutorBuilt=false}
+function switchInput(m){inputMode=m;document.querySelectorAll('.itab').forEach((b,i)=>b.classList.toggle('active',(i===0&&m==='paste')||(i===1&&m==='file')));document.getElementById('ipaste').classList.toggle('active',m==='paste');document.getElementById('ifile').classList.toggle('active',m==='file');updateBtns();tutorBuilt=false}
 function onDrag(e){e.preventDefault();document.getElementById('dropZone').classList.add('drag-over')}
 function onDragLeave(){document.getElementById('dropZone').classList.remove('drag-over')}
 function onDrop(e){e.preventDefault();document.getElementById('dropZone').classList.remove('drag-over');onFiles(e.dataTransfer.files)}
-function onFiles(files){for(const f of files)if(!uploadedFiles.find(x=>x.name===f.name))uploadedFiles.push(f);renderFiles();updateBtns();tutorBuilt=false;}
-function removeFile(n){uploadedFiles=uploadedFiles.filter(f=>f.name!==n);renderFiles();updateBtns();tutorBuilt=false;}
-function renderFiles(){
-  document.getElementById('fileList').innerHTML=uploadedFiles.map(f=>{
-    const ext=f.name.split('.').pop().toLowerCase();
-    const icon=ext==='pdf'?'📄':ext==='txt'?'📃':'🖼️';
-    const sz=f.size>1048576?(f.size/1048576).toFixed(1)+'MB':Math.round(f.size/1024)+'KB';
-    return`<div class="file-item"><span style="font-size:18px">${icon}</span><span class="file-name">${f.name}</span><span class="file-size">${sz}</span><button class="remove-btn" onclick="removeFile('${f.name.replace(/'/g,"\\'")}')">✕</button></div>`;
-  }).join('');
-}
-function goPage(p){
-  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));
-  document.getElementById('page-'+p).classList.add('active');
-  document.getElementById('nav-'+p).classList.add('active');
-  if(p==='tutor')renderTutor();
-}
+function onFiles(files){for(const f of files)if(!uploadedFiles.find(x=>x.name===f.name))uploadedFiles.push(f);renderFiles();updateBtns();tutorBuilt=false}
+function removeFile(n){uploadedFiles=uploadedFiles.filter(f=>f.name!==n);renderFiles();updateBtns();tutorBuilt=false}
+function renderFiles(){document.getElementById('fileList').innerHTML=uploadedFiles.map(f=>{const ext=f.name.split('.').pop().toLowerCase();const icon=ext==='pdf'?'📄':ext==='txt'?'📃':'🖼️';const sz=f.size>1048576?(f.size/1048576).toFixed(1)+'MB':Math.round(f.size/1024)+'KB';return`<div class="file-item"><span style="font-size:18px">${icon}</span><span class="file-name">${f.name}</span><span class="file-size">${sz}</span><button class="remove-btn" onclick="removeFile('${f.name.replace(/'/g,"\\'")}')">✕</button></div>`}).join('')}
+function goPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));document.getElementById('page-'+p).classList.add('active');document.getElementById('nav-'+p).classList.add('active');if(p==='tutor')renderTutor()}
 function loading(el,msg,sub){document.getElementById(el).innerHTML=`<div class="spinner-wrap"><div class="spinner"></div><div class="spin-text">${msg}</div><div class="spin-sub">${sub}</div></div>`}
 function setErr(el,msg){document.getElementById(el).innerHTML=`<div class="err">⚠️ ${msg}</div>`}
 function clearEl(el){document.getElementById(el).innerHTML=''}
 async function readB64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file)})}
 async function readTxt(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsText(file)})}
 async function buildMessages(prompt){
-  if(inputMode==='paste'){
-    return[{role:'user',content:`${prompt}\n\nContent:\n${document.getElementById('pasteArea').value.trim()}`}];
-  }
+  if(inputMode==='paste')return[{role:'user',content:`${prompt}\n\nContent:\n${document.getElementById('pasteArea').value.trim()}`}];
   const parts=[];
-  for(const f of uploadedFiles){
-    const ext=f.name.split('.').pop().toLowerCase();
-    if(ext==='txt'){const t=await readTxt(f);parts.push({type:'text',text:`File: ${f.name}\n\n${t}`})}
-    else if(ext==='pdf'){const b=await readB64(f);parts.push({type:'document',source:{type:'base64',media_type:'application/pdf',data:b}})}
-    else{const b=await readB64(f);parts.push({type:'image',source:{type:'base64',media_type:f.type||'image/jpeg',data:b}})}
-  }
+  for(const f of uploadedFiles){const ext=f.name.split('.').pop().toLowerCase();if(ext==='txt'){const t=await readTxt(f);parts.push({type:'text',text:`File: ${f.name}\n\n${t}`})}else if(ext==='pdf'){const b=await readB64(f);parts.push({type:'document',source:{type:'base64',media_type:'application/pdf',data:b}})}else{const b=await readB64(f);parts.push({type:'image',source:{type:'base64',media_type:f.type||'image/jpeg',data:b}})}}
   parts.push({type:'text',text:prompt});
   return[{role:'user',content:parts}];
 }
-async function callClaude(system,messages){
+async function callAI(system,messages){
   const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system,messages})});
   const text=await r.text();
   let data;
-  try{data=JSON.parse(text)}catch(e){throw new Error('Bad response from server: '+text.slice(0,100))}
-  if(!r.ok)throw new Error(data.error?.message||`Error ${r.status}`);
+  try{data=JSON.parse(text)}catch(e){throw new Error('Bad server response: '+text.slice(0,100))}
+  if(!r.ok)throw new Error(data.error||`Error ${r.status}`);
   if(!data.content||!Array.isArray(data.content))throw new Error('Unexpected response format');
   const raw=data.content.map(c=>c.text||'').join('');
-  const cleaned=raw.replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/\s*```$/,'').trim();
-  return cleaned;
+  return raw.replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/\s*```$/,'').trim();
 }
 async function doSummary(){
-  clearEl('summaryErr');
-  const btn=document.getElementById('summaryBtn');
-  btn.disabled=true;btn.textContent='⌛ Generating...';
+  clearEl('summaryErr');const btn=document.getElementById('summaryBtn');btn.disabled=true;btn.textContent='⌛ Generating...';
   loading('summaryResult','Analysing your content...','Generating summary and key points');
   try{
-    const sys=`You are a study assistant. You MUST respond with ONLY a valid JSON object. No explanation, no markdown, no code blocks. Just raw JSON.
-Format: {"summary":"4-6 sentence overview","keyPoints":["point1","point2","point3","point4","point5"],"keywords":["k1","k2","k3","k4","k5"]}`;
-    const msgs=await buildMessages('Summarise this content for a student. Remember: respond with raw JSON only.');
-    const raw=await callClaude(sys,msgs);
-    const d=JSON.parse(raw);
-    lastSummary=d;
+    const sys=`You are a study assistant. Respond ONLY with raw JSON — no markdown, no code blocks, no explanation.
+{"summary":"4-6 sentence overview","keyPoints":["point1","point2","point3","point4","point5"],"keywords":["k1","k2","k3","k4","k5"]}`;
+    const msgs=await buildMessages('Summarise this content for a student. Respond with raw JSON only.');
+    const raw=await callAI(sys,msgs);
+    const d=JSON.parse(raw);lastSummary=d;
     const kp=d.keyPoints.map((p,i)=>`<li class="kp"><span class="kp-n">${i+1}</span><span>${p}</span></li>`).join('');
     const tgs=(d.keywords||[]).map(k=>`<span class="tag">${k}</span>`).join('');
     document.getElementById('summaryResult').innerHTML=`
-      <div class="copy-row" style="margin-top:1.2rem"><span class="result-title">Study Summary</span><button class="copy-btn" onclick="copySum()">⎘ Copy all</button></div>
+      <div class="copy-row"><span class="result-title">Study Summary</span><button class="copy-btn" onclick="copySum()">⎘ Copy all</button></div>
       <div class="result-card">
-        <div class="block"><div class="block-label"><span class="dot"></span>Overview</div><p class="summary-text">${d.summary}</p></div>
-        <div class="block"><div class="block-label"><span class="dot"></span>Key points</div><ul class="kp-list">${kp}</ul></div>
-        ${tgs?`<div class="block"><div class="block-label"><span class="dot"></span>Key topics</div><div class="tags">${tgs}</div></div>`:''}
+        <div class="block"><div class="block-label">Overview</div><p class="summary-text">${d.summary}</p></div>
+        <div class="block"><div class="block-label">Key points</div><ul class="kp-list">${kp}</ul></div>
+        ${tgs?`<div class="block"><div class="block-label">Key topics</div><div class="tags">${tgs}</div></div>`:''}
       </div>`;
   }catch(e){clearEl('summaryResult');setErr('summaryErr',e.message||'Something went wrong.')}
   finally{btn.disabled=false;btn.textContent='✦ Generate Summary & Key Points';updateBtns()}
 }
-function copySum(){
-  if(!lastSummary)return;
-  const t=`OVERVIEW\n${lastSummary.summary}\n\nKEY POINTS\n${lastSummary.keyPoints.map((p,i)=>`${i+1}. ${p}`).join('\n')}\n\nKEY TOPICS\n${(lastSummary.keywords||[]).join(', ')}`;
-  navigator.clipboard.writeText(t).then(()=>{const b=document.querySelector('.copy-btn');if(b){b.textContent='✓ Copied!';setTimeout(()=>b.textContent='⎘ Copy all',2000)}});
-}
+function copySum(){if(!lastSummary)return;const t=`OVERVIEW\n${lastSummary.summary}\n\nKEY POINTS\n${lastSummary.keyPoints.map((p,i)=>`${i+1}. ${p}`).join('\n')}\n\nKEY TOPICS\n${(lastSummary.keywords||[]).join(', ')}`;navigator.clipboard.writeText(t).then(()=>{const b=document.querySelector('.copy-btn');if(b){b.textContent='✓ Copied!';setTimeout(()=>b.textContent='⎘ Copy all',2000)}})}
 async function doQuiz(){
   clearEl('quizErr');quizData=null;quizAnswers={};quizSubmitted=false;
-  const btn=document.getElementById('quizBtn');
-  btn.disabled=true;btn.textContent='⌛ Generating...';
+  const btn=document.getElementById('quizBtn');btn.disabled=true;btn.textContent='⌛ Generating...';
   loading('quizResult','Building your quiz...','Creating 5 multiple choice questions');
   try{
-    const sys=`You are a quiz generator. You MUST respond with ONLY a valid JSON array. No explanation, no markdown, no code blocks. Just raw JSON.
-Format: [{"question":"...","options":["A. ...","B. ...","C. ...","D. ..."],"answer":0,"explanation":"..."}]
-answer is the 0-based index of the correct option. Generate exactly 5 questions.`;
-    const msgs=await buildMessages('Generate a 5-question multiple choice quiz. Remember: respond with raw JSON array only.');
-    const raw=await callClaude(sys,msgs);
-    quizData=JSON.parse(raw);
-    renderQuiz();
+    const sys=`You are a quiz generator. Respond ONLY with a raw JSON array — no markdown, no code blocks, no explanation.
+[{"question":"...","options":["A. ...","B. ...","C. ...","D. ..."],"answer":0,"explanation":"..."}]
+answer is 0-based index. Generate exactly 5 questions.`;
+    const msgs=await buildMessages('Generate a 5-question multiple choice quiz. Respond with raw JSON array only.');
+    const raw=await callAI(sys,msgs);
+    quizData=JSON.parse(raw);renderQuiz();
   }catch(e){clearEl('quizResult');setErr('quizErr',e.message||'Something went wrong.')}
   finally{btn.disabled=false;btn.textContent='⚡ Generate Quiz';updateBtns()}
 }
@@ -292,44 +279,27 @@ function renderQuiz(){
   if(!quizData)return;
   const letters=['A','B','C','D'];
   let scoreHtml='';
-  if(quizSubmitted){
-    const score=quizData.filter((_,i)=>quizAnswers[i]===quizData[i].answer).length;
-    const pct=Math.round((score/quizData.length)*100);
-    const emoji=pct>=80?'🎉':pct>=60?'👍':'📚';
-    scoreHtml=`<div class="score-bar"><div><div class="score-num">${score}/${quizData.length}</div><div class="score-label">Questions correct</div></div><div style="text-align:right"><span class="score-pct">${emoji} ${pct}%</span><button class="retake-btn" onclick="retakeQuiz()">↺ Retake quiz</button></div></div>`;
-  }
+  if(quizSubmitted){const score=quizData.filter((_,i)=>quizAnswers[i]===quizData[i].answer).length;const pct=Math.round((score/quizData.length)*100);const emoji=pct>=80?'🎉':pct>=60?'👍':'📚';scoreHtml=`<div class="score-bar"><div><div class="score-num">${score}/${quizData.length}</div><div class="score-label">Questions correct</div></div><div style="text-align:right"><span class="score-pct">${emoji} ${pct}%</span><button class="retake-btn" onclick="retakeQuiz()">↺ Retake</button></div></div>`}
   const qs=quizData.map((q,qi)=>{
-    const opts=q.options.map((o,oi)=>{
-      let cls='opt';
-      if(quizSubmitted){if(oi===q.answer)cls+=' reveal-correct';else if(quizAnswers[qi]===oi)cls+=' wrong';}
-      else if(quizAnswers[qi]===oi)cls+=' selected';
-      return`<button class="${cls}" onclick="selectOpt(${qi},${oi})" ${quizSubmitted?'disabled':''}><span class="opt-letter">${letters[oi]}</span>${o.replace(/^[A-D]\.\s*/,'')}</button>`;
-    }).join('');
-    let indicator='';
-    if(quizSubmitted)indicator=quizAnswers[qi]===q.answer?'<span style="color:#27500A;font-size:12px;font-weight:700">✓ Correct</span>':'<span style="color:#A32D2D;font-size:12px;font-weight:700">✗ Incorrect</span>';
-    return`<div class="q-card"><div class="q-meta"><span class="q-num">Question ${qi+1} of ${quizData.length}</span>${indicator}</div><div class="q-text">${q.question}</div><div class="options">${opts}</div>${quizSubmitted?`<div class="explanation">💡 ${q.explanation}</div>`:''}</div>`;
+    const opts=q.options.map((o,oi)=>{let cls='opt';if(quizSubmitted){if(oi===q.answer)cls+=' reveal-correct';else if(quizAnswers[qi]===oi)cls+=' wrong';}else if(quizAnswers[qi]===oi)cls+=' selected';return`<button class="${cls}" onclick="selectOpt(${qi},${oi})" ${quizSubmitted?'disabled':''}><span class="opt-letter">${letters[oi]}</span>${o.replace(/^[A-D]\.\s*/,'')}</button>`}).join('');
+    let indicator='';if(quizSubmitted)indicator=quizAnswers[qi]===q.answer?'<span style="color:var(--success);font-size:12px;font-weight:800">✓ Correct</span>':'<span style="color:var(--danger);font-size:12px;font-weight:800">✗ Wrong</span>';
+    return`<div class="q-card"><div class="q-meta"><span class="q-num">Question ${qi+1} / ${quizData.length}</span>${indicator}</div><div class="q-text">${q.question}</div><div class="options">${opts}</div>${quizSubmitted?`<div class="explanation">💡 ${q.explanation}</div>`:''}</div>`;
   }).join('');
   const allAnswered=quizData.every((_,i)=>quizAnswers[i]!==undefined);
-  document.getElementById('quizResult').innerHTML=`<div style="margin-top:1.2rem">${scoreHtml}${qs}${!quizSubmitted?`<button class="action-btn" onclick="submitQuiz()" style="margin-top:0" ${allAnswered?'':'disabled'}>Submit Quiz</button>`:''}</div>`;
+  document.getElementById('quizResult').innerHTML=`<div style="margin-top:1.25rem">${scoreHtml}${qs}${!quizSubmitted?`<button class="action-btn" onclick="submitQuiz()" style="margin-top:0" ${allAnswered?'':'disabled'}>Submit Quiz</button>`:''}</div>`;
 }
 function selectOpt(qi,oi){if(quizSubmitted)return;quizAnswers[qi]=oi;renderQuiz()}
 function submitQuiz(){quizSubmitted=true;renderQuiz()}
 function retakeQuiz(){quizAnswers={};quizSubmitted=false;renderQuiz()}
 function renderTutor(){
-  if(!hasContent()){
-    document.getElementById('tutorArea').innerHTML=`<div class="no-content-notice"><strong>No content loaded yet</strong>Add your notes in the panel above first.</div>`;
-    tutorBuilt=false;return;
-  }
+  if(!hasContent()){document.getElementById('tutorArea').innerHTML=`<div class="no-content-notice"><strong>No content loaded yet</strong>Add your notes in the panel above first.</div>`;tutorBuilt=false;return}
   if(tutorBuilt)return;
   tutorBuilt=true;chatHistory=[];
   document.getElementById('tutorArea').innerHTML=`
     <div class="chat-wrap">
-      <div class="chat-header">
-        <div class="tutor-avatar">S</div>
-        <div><div class="tutor-name">Studify Tutor</div><div class="tutor-sub">Ask anything about your content — powered by Claude</div></div>
-      </div>
+      <div class="chat-header"><div class="tutor-avatar">✦</div><div><div class="tutor-name">Studify Tutor</div><div class="tutor-sub">Ask anything about your content</div></div></div>
       <div class="chat-messages" id="chatMsgs">
-        <div class="msg bot"><div class="bubble">Hi! I've read your content and I'm ready to help. Ask me to explain anything, quiz you verbally, or go deeper on any topic.</div><span class="msg-time">now</span></div>
+        <div class="msg bot"><div class="bubble">Hey! I've read your content and I'm ready to help. Ask me to explain anything, quiz you verbally, or go deeper on any topic. 🚀</div><span class="msg-time">now</span></div>
       </div>
       <div class="chat-input-row">
         <textarea class="chat-input" id="chatIn" placeholder="Ask a question about your content..." rows="1" onkeydown="onChatKey(event)"></textarea>
@@ -339,48 +309,32 @@ function renderTutor(){
 }
 function onChatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat()}}
 async function sendChat(){
-  if(isSending)return;
-  const inp=document.getElementById('chatIn');
-  const msg=inp.value.trim();
-  if(!msg)return;
-  inp.value='';isSending=true;
-  document.getElementById('sendBtn').disabled=true;
-  appendMsg('user',msg);
-  chatHistory.push({role:'user',content:msg});
-  const typingId='t'+Date.now();
-  const chatEl=document.getElementById('chatMsgs');
+  if(isSending)return;const inp=document.getElementById('chatIn');const msg=inp.value.trim();if(!msg)return;
+  inp.value='';isSending=true;document.getElementById('sendBtn').disabled=true;
+  appendMsg('user',msg);chatHistory.push({role:'user',content:msg});
+  const typingId='t'+Date.now();const chatEl=document.getElementById('chatMsgs');
   chatEl.innerHTML+=`<div class="msg bot" id="${typingId}"><div class="bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div></div>`;
   chatEl.scrollTop=chatEl.scrollHeight;
   try{
-    let sys='You are a helpful, encouraging study tutor. Answer clearly and concisely. Keep responses student-friendly.';
+    let sys='You are a helpful, encouraging study tutor. Answer clearly and concisely. Keep responses student-friendly and engaging.';
     if(inputMode==='paste'){sys+=`\n\nStudent content:\n${document.getElementById('pasteArea').value.trim()}`;}
     let apiMsgs;
     if(chatHistory.length===1&&inputMode==='file'&&uploadedFiles.length>0){
-      const parts=[];
-      for(const f of uploadedFiles){
-        const ext=f.name.split('.').pop().toLowerCase();
-        if(ext==='txt'){const t=await readTxt(f);parts.push({type:'text',text:`File: ${f.name}\n\n${t}`})}
-        else if(ext==='pdf'){const b=await readB64(f);parts.push({type:'document',source:{type:'base64',media_type:'application/pdf',data:b}})}
-        else{const b=await readB64(f);parts.push({type:'image',source:{type:'base64',media_type:f.type||'image/jpeg',data:b}})}
-      }
-      parts.push({type:'text',text:msg});
-      apiMsgs=[{role:'user',content:parts}];
+      const parts=[];for(const f of uploadedFiles){const ext=f.name.split('.').pop().toLowerCase();if(ext==='txt'){const t=await readTxt(f);parts.push({type:'text',text:`File: ${f.name}\n\n${t}`})}else if(ext==='pdf'){const b=await readB64(f);parts.push({type:'document',source:{type:'base64',media_type:'application/pdf',data:b}})}else{const b=await readB64(f);parts.push({type:'image',source:{type:'base64',media_type:f.type||'image/jpeg',data:b}})}}
+      parts.push({type:'text',text:msg});apiMsgs=[{role:'user',content:parts}];
     }else{apiMsgs=chatHistory;}
     const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:sys,messages:apiMsgs})});
-    const text=await r.text();
-    let data;
-    try{data=JSON.parse(text)}catch(e){throw new Error('Bad response: '+text.slice(0,100))}
-    if(!r.ok)throw new Error(data.error?.message||'Error');
+    const text=await r.text();let data;
+    try{data=JSON.parse(text)}catch(e){throw new Error('Bad response')}
+    if(!r.ok)throw new Error(data.error||'Error');
     const reply=(data.content||[]).map(c=>c.text||'').join('');
     chatHistory.push({role:'assistant',content:reply});
-    document.getElementById(typingId)?.remove();
-    appendMsg('bot',reply);
+    document.getElementById(typingId)?.remove();appendMsg('bot',reply);
   }catch(e){document.getElementById(typingId)?.remove();appendMsg('bot','Sorry: '+e.message);}
   finally{isSending=false;document.getElementById('sendBtn').disabled=false;inp.focus();}
 }
 function appendMsg(role,text){
-  const chatEl=document.getElementById('chatMsgs');
-  const now=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  const chatEl=document.getElementById('chatMsgs');const now=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
   const safe=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
   chatEl.innerHTML+=`<div class="msg ${role}"><div class="bubble">${safe}</div><span class="msg-time">${now}</span></div>`;
   chatEl.scrollTop=chatEl.scrollHeight;
