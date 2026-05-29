@@ -3,81 +3,80 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Studify</title>
+<title>Studify Workstation</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#080A10;
-  --surface:#0F1322;
-  --surface2:#171D34;
-  --surface3:#1E2644;
-  --border:#222B4E;
-  --text:#F3F4F6;
+  --bg:#06080E;
+  --surface:#0B0F19;
+  --surface2:#121829;
+  --surface3:#182036;
+  --border:#1E294B;
+  --text:#F8FAFC;
   --text2:#94A3B8;
   --text3:#475569;
-  --accent:#2563EB;
+  --accent:#1D4ED8;
   --accent2:#3B82F6;
-  --accent-light:#0F1E36;
-  --accent-glow:rgba(37,99,235,0.15);
+  --accent-light:#0C1938;
+  --accent-glow:rgba(37,99,235,0.12);
   --danger:#EF4444;
-  --danger-light:#251218;
+  --danger-light:#1F1015;
   --success:#10B981;
-  --success-light:#06231A;
+  --success-light:#051F16;
   --radius:16px;--radius-sm:10px;--radius-xs:6px;
 }
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow:hidden}
 
-/* SPLIT SCREEN DASHBOARD LAYOUT */
+/* WORKSTATION GRID DASHBOARD */
 .dashboard{display:flex;height:100vh;width:100vw;position:relative}
 
-/* LEFT COLUMN: SOURCE PANEL */
-.panel-left{width:42%;background:var(--surface);border-right:1px solid var(--border);padding:2rem;display:flex;flex-direction:column;gap:1.5rem;overflow-y:auto}
+/* LEFT SIDE PANEL (pinned) */
+.panel-left{width:40%;background:var(--surface);border-right:1px solid var(--border);padding:2rem;display:flex;flex-direction:column;gap:1.75rem;overflow-y:auto;position:relative;z-index:10}
 
-/* RIGHT COLUMN: DISCOVERY ENGINE */
-.panel-right{width:58%;background:var(--bg);padding:2rem;display:flex;flex-direction:column;overflow-y:auto}
+/* RIGHT SPLIT WORKSPACE */
+.panel-right{width:60%;background:var(--bg);padding:2rem;display:flex;flex-direction:column;overflow-y:auto;position:relative;z-index:5}
 
-/* BRANDING & LOGO */
-.header{display:flex;align-items:center;margin-bottom:0.5rem}
-.logo{font-size:26px;font-weight:800;letter-spacing:-0.5px;color:var(--text);display:flex;align-items:center;gap:8px}
+/* TOP HEADER */
+.header{display:flex;align-items:center;justify-content:between}
+.logo{font-size:24px;font-weight:800;letter-spacing:-0.5px;color:var(--text);display:flex;align-items:center;gap:8px}
 .logo span{color:var(--accent2);font-weight:900}
 
-/* TAB REGIONS */
-.panel-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
-.input-container{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;display:flex;flex-direction:column;gap:12px;position:relative;z-index:10}
-.input-tabs{display:flex;gap:6px;background:var(--bg);border-radius:var(--radius-sm);padding:4px;border:1px solid var(--border);position:relative;z-index:20}
-.itab{flex:1;padding:10px;font-size:12px;font-weight:700;font-family:inherit;color:var(--text2);background:transparent;border:none;border-radius:var(--radius-xs);cursor:pointer;transition:all 0.2s;position:relative;z-index:30}
-.itab.active{background:var(--accent-light);color:var(--accent2);border:1px solid rgba(37,99,235,0.2)}
+/* TAB MODULES */
+.panel-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:2px}
+.input-container{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;display:flex;flex-direction:column;gap:14px;position:relative}
+.input-tabs{display:flex;gap:6px;background:var(--bg);border-radius:var(--radius-sm);padding:4px;border:1px solid var(--border)}
+.itab{flex:1;padding:10px;font-size:12px;font-weight:700;font-family:inherit;color:var(--text2);background:transparent;border:none;border-radius:var(--radius-xs);cursor:pointer;transition:all 0.2s}
+.itab.active{background:var(--accent-light);color:var(--accent2);border:1px solid rgba(59,130,246,0.15)}
 
-/* TEXT & UPLOAD HOVERS */
-.itab-content{display:none;position:relative;z-index:15}.itab-content.active{display:block}
-textarea{width:100%;min-height:220px;border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;font-family:inherit;font-size:13.5px;color:var(--text);background:var(--bg);resize:none;outline:none;transition:all 0.2s;line-height:1.7}
+/* CONTENT LAYERS */
+.itab-content{display:none;width:100%}.itab-content.active{display:block}
+textarea{width:100%;min-height:240px;border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;font-family:inherit;font-size:13.5px;color:var(--text);background:var(--bg);resize:none;outline:none;transition:all 0.2s;line-height:1.7}
 textarea:focus{border-color:var(--accent);box-shadow:0 0 12px var(--accent-glow)}
 textarea::placeholder{color:var(--text3)}
-.upload-zone{border:1.5px dashed var(--border);border-radius:var(--radius-sm);background:var(--bg);padding:3rem 1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
+.word-count{font-size:11px;color:var(--text3);text-align:right;font-weight:600;margin-top:4px}
+
+/* UPLOAD REGIONS */
+.upload-zone{border:1.5px dashed var(--border);border-radius:var(--radius-sm);background:var(--bg);padding:3.5rem 1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
 .upload-zone:hover,.upload-zone.drag-over{border-color:var(--accent);background:var(--accent-light)}
 .upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:40}
 .upload-icon{font-size:32px;margin-bottom:12px}
-.upload-title{font-size:14px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.upload-title{font-size:13.5px;font-weight:700;margin-bottom:4px;color:var(--text)}
 .upload-sub{font-size:12px;color:var(--text3)}
-.upload-sub strong{color:var(--accent2)}
-.word-count{font-size:11px;color:var(--text3);text-align:right;font-weight:600}
 
-/* NAVIGATION UTILITIES */
+/* SYSTEM MENU INTERFACE */
 .nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .nav-btn{padding:14px;font-size:13px;font-weight:700;font-family:inherit;color:var(--text2);background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:4px}
 .nav-btn:hover{border-color:var(--accent);color:var(--text)}
 .nav-btn.active{background:var(--accent-light);color:var(--accent2);border-color:var(--accent);box-shadow:0 4px 15px var(--accent-glow)}
 
-/* ACTION TRIGGERS */
-.action-btn{width:100%;padding:15px;background:var(--accent);color:white;border:none;border-radius:var(--radius-sm);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(37,99,235,0.2)}
+/* MASTER GENERATOR BUTTONS */
+.action-btn{width:100%;padding:15px;background:var(--accent);color:white;border:none;border-radius:var(--radius-sm);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(37,99,235,0.15)}
 .action-btn:hover:not(:disabled){background:var(--accent2);transform:translateY(-1px)}
-.action-btn:disabled{opacity:0.3;cursor:not-allowed;box-shadow:none}
+.action-btn:disabled{opacity:0.25;cursor:not-allowed;box-shadow:none}
 
-/* WORKSPACE SCREEN HANDLERS */
+/* APPLICATION PANELS */
 .page{display:none;height:100%;flex-direction:column;gap:1.25rem}.page.active{display:flex}
-
-/* RESULTS & CORE VIEWS */
 .result-container{flex:1;overflow-y:auto;padding-right:4px}
 .result-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .block{padding:1.5rem;border-bottom:1px solid var(--border)}
@@ -85,17 +84,19 @@ textarea::placeholder{color:var(--text3)}
 .block-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .block-label::before{content:'';width:4px;height:14px;background:var(--accent);border-radius:2px}
 .summary-text{font-size:14px;line-height:1.8;color:var(--text2);white-space:pre-wrap;text-align:justify}
+
+/* CORE KEY POINTS ITEMS */
 .kp-list{list-style:none;display:flex;flex-direction:column;gap:12px}
 .kp{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.7;color:var(--text2)}
-.kp-n{min-width:24px;height:24px;background:var(--accent-light);color:var(--accent2);border-radius:6px;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border:1px solid rgba(37,99,235,0.2)}
+.kp-n{min-width:24px;height:24px;background:var(--accent-light);color:var(--accent2);border-radius:6px;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border:1px solid rgba(59,130,246,0.15)}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
 .tag{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:12px;color:var(--text2);font-weight:600}
 .copy-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
-.result-title{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3)}
+.result-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3)}
 .copy-btn{font-family:inherit;font-size:12px;padding:6px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;cursor:pointer;color:var(--text2);transition:all 0.2s;font-weight:600}
 .copy-btn:hover{background:var(--accent-light);color:var(--accent2);border-color:var(--accent)}
 
-/* QUIZ STYLES */
+/* EXAM RECALL ITEMS */
 .q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:12px}
 .q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .q-num{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;text-transform:uppercase}
@@ -104,25 +105,25 @@ textarea::placeholder{color:var(--text3)}
 .opt{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.15s;font-size:13px;color:var(--text2);background:var(--bg);font-family:inherit;text-align:left;width:100%}
 .opt:hover:not(:disabled){border-color:var(--accent);color:var(--text);background:var(--accent-light)}
 .opt.selected{border-color:var(--accent);color:var(--accent2);background:var(--accent-light)}
-.opt.correct,.opt.reveal-correct{border-color:var(--success);background:var(--success-light);color:var(--success)}
+.opt.reveal-correct{border-color:var(--success);background:var(--success-light);color:var(--success)}
 .opt.wrong{border-color:var(--danger);background:var(--danger-light);color:var(--danger)}
 .opt-letter{min-width:24px;height:24px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--text3)}
 .opt.selected .opt-letter{background:var(--accent);color:white;border-color:var(--accent)}
 .explanation{margin-top:14px;font-size:12.5px;line-height:1.7;color:var(--text2);padding:14px;background:var(--surface2);border-radius:var(--radius-sm);border-left:4px solid var(--accent)}
-.score-bar{background:linear-gradient(135deg,var(--accent-light),var(--surface));border:1px solid rgba(37,99,235,0.2);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between}
+.score-bar{background:linear-gradient(135deg,var(--accent-light),var(--surface));border:1px solid rgba(59,130,246,0.15);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between}
 .score-num{font-size:38px;font-weight:800;color:var(--accent2);letter-spacing:-1px}
 .score-label{font-size:12px;color:var(--text3);font-weight:600}
-.score-pct{font-size:16px;font-weight:700;color:var(--accent2);margin-bottom:8px;display:block}
+.score-pct{font-size:15px;font-weight:700;color:var(--accent2);margin-bottom:6px;display:block}
 .retake-btn{font-family:inherit;font-size:12px;padding:8px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-xs);cursor:pointer;color:var(--text2);font-weight:700;transition:all 0.2s}
 .retake-btn:hover{border-color:var(--accent);color:var(--accent2)}
 
-/* CHAT WRAPPERS */
+/* TUTORIAL CONSOLE CHAT */
 .chat-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;height:100%}
 .chat-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;background:var(--surface2)}
-.tutor-avatar{width:38px;height:38px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;color:white;font-weight:800}
+.tutor-avatar{width:36px;height:36px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;color:white;font-weight:800}
 .tutor-name{font-size:14px;font-weight:700;color:var(--text)}
 .tutor-sub{font-size:11px;color:var(--text3);font-weight:600}
-.chat-messages{padding:20px;display:flex;flex-direction:column;gap:14px;flex:1;max-height:calc(100vh - 240px);overflow-y:auto}
+.chat-messages{padding:20px;display:flex;flex-direction:column;gap:14px;flex:1;max-height:calc(100vh - 250px);overflow-y:auto}
 .msg{max-width:85%;display:flex;flex-direction:column;gap:4px}
 .msg.user{align-self:flex-end;align-items:flex-end}
 .msg.bot{align-self:flex-start;align-items:flex-start}
@@ -133,24 +134,24 @@ textarea::placeholder{color:var(--text3)}
 .chat-input-row{padding:16px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:center;background:var(--surface2)}
 .chat-input{flex:1;border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;font-family:inherit;font-size:13.5px;color:var(--text);background:var(--bg);resize:none;outline:none;transition:all 0.2s;height:44px;line-height:1.5}
 .chat-input:focus{border-color:var(--accent)}
-.send-btn{width:44px;height:44px;background:var(--accent);color:white;border:none;border-radius:var(--radius-sm);cursor:pointer;font-size:16px;transition:all 0.2s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(37,99,235,0.3)}
+.send-btn{width:44px;height:44px;background:var(--accent);color:white;border:none;border-radius:var(--radius-sm);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
 .send-btn:hover:not(:disabled){background:var(--accent2)}
-.send-btn:disabled{opacity:0.3;cursor:not-allowed}
+.send-btn:disabled{opacity:0.3}
 
-/* NOTICES */
-.no-content-notice{text-align:center;padding:5rem 2rem;color:var(--text3);font-size:13.5px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-top:2rem}
-.no-content-notice strong{display:block;font-size:16px;color:var(--text2);margin-bottom:6px;font-weight:700}
+/* LOADING UTILS & HOVERS */
+.no-content-notice{text-align:center;padding:6rem 2rem;color:var(--text3);font-size:13.5px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-top:1rem}
+.no-content-notice strong{display:block;font-size:15px;color:var(--text2);margin-bottom:6px;font-weight:700}
 .spinner-wrap{text-align:center;padding:5rem 2rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
-.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.spin-text{font-size:15px;font-weight:700;color:var(--text2)}
-.spin-sub{font-size:12px;color:var(--text3);margin-top:6px}
-.err{background:var(--danger-light);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-sm);padding:14px 18px;font-size:13.5px;color:var(--danger);font-weight:600;margin-top:12px}
+.spin-text{font-size:14px;font-weight:700;color:var(--text2)}
+.spin-sub{font-size:11px;color:var(--text3);margin-top:6px}
+.err{background:var(--danger-light);border:1px solid rgba(239,68,68,0.15);border-radius:var(--radius-sm);padding:14px 18px;font-size:13.5px;color:var(--danger);font-weight:600;margin-top:12px}
 .file-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .file-item{display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-xs);padding:12px 16px}
 .file-name{flex:1;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
 .file-size{font-size:11px;color:var(--text3)}
-.remove-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px;padding:4px 8px;border-radius:4px;transition:color 0.2s}
+.remove-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px;padding:4px 8px}
 .remove-btn:hover{color:var(--danger)}
 </style>
 </head>
@@ -159,33 +160,33 @@ textarea::placeholder{color:var(--text3)}
 
   <div class="panel-left">
     <div class="header">
-      <div class="logo">✦ <span>Studify</span></div>
+      <div class="logo">✦ Studify<span>Workstation</span></div>
     </div>
 
     <div class="input-container">
-      <div class="panel-label">Study Content Core</div>
+      <div class="panel-label">Source Processing Core</div>
       <div class="input-tabs">
-        <button class="itab active" id="tab-paste" onclick="switchInput('paste')">✏️ Paste Text</button>
-        <button class="itab" id="tab-file" onclick="switchInput('file')">📎 Upload Materials</button>
+        <button class="itab active" id="tab-paste" onclick="switchInput('paste')">✏️ Ingest Text</button>
+        <button class="itab" id="tab-file" onclick="switchInput('file')">📎 Mount Documents</button>
       </div>
       
       <div id="ipaste" class="itab-content active">
-        <textarea id="pasteArea" placeholder="Drop your academic notes, articles, textbook chapters, or concepts here..." oninput="onPasteInput()"></textarea>
-        <div class="word-count" id="wc">0 words</div>
+        <textarea id="pasteArea" placeholder="Paste structural data matrices, textbook sections, review metrics, or literature data charts directly..." oninput="onPasteInput()"></textarea>
+        <div class="word-count" id="wc">0 words loaded</div>
       </div>
       
       <div id="ifile" class="itab-content">
         <div class="upload-zone" id="dropZone" ondragover="onDrag(event)" ondragleave="onDragLeave()" ondrop="onDrop(event)">
           <input type="file" id="fileInput" accept=".pdf,image/*,.txt" multiple onchange="onFiles(event.target.files)"/>
-          <div class="upload-icon">📂</div>
-          <div class="upload-title">Drop resources here or browse</div>
-          <div class="upload-sub">Accepts academic <strong>PDF</strong>, <strong>images</strong>, or <strong>text</strong></div>
+          <div class="upload-icon">📁</div>
+          <div class="upload-title">Drop core archives or click to browse</div>
+          <div class="upload-sub">Ingests unstructured academic <strong>PDF</strong>, <strong>text</strong>, or <strong>images</strong></div>
         </div>
         <div class="file-list" id="fileList"></div>
       </div>
     </div>
 
-    <div class="panel-label">Navigation Engine</div>
+    <div class="panel-label">System Architecture Modules</div>
     <div class="nav">
       <button class="nav-btn active" id="nav-summary" onclick="goPage('summary')"><span>📋</span>Summary</button>
       <button class="nav-btn" id="nav-quiz" onclick="goPage('quiz')"><span>🧠</span>Quiz</button>
@@ -196,24 +197,24 @@ textarea::placeholder{color:var(--text3)}
   <div class="panel-right">
     
     <div id="page-summary" class="page active">
-      <button class="action-btn" id="summaryBtn" onclick="doSummary()" disabled>✦ Generate Unrestricted Study Guide</button>
+      <button class="action-btn" id="summaryBtn" onclick="doSummary()" disabled>✦ Compile Unrestricted Academic Review</button>
       <div id="summaryErr"></div>
       <div id="summaryResult" class="result-container">
-        <div class="no-content-notice"><strong>No Material Analyzed</strong>Populate the source console on the left side to compile your guide.</div>
+        <div class="no-content-notice"><strong>Data Streams Disconnected</strong>Load text sources or mount documentation sets in the left console.</div>
       </div>
     </div>
 
     <div id="page-quiz" class="page">
-      <button class="action-btn" id="quizBtn" onclick="doQuiz()" disabled>⚡ Build Interactive Examination</button>
+      <button class="action-btn" id="quizBtn" onclick="doQuiz()" disabled>⚡ Initialize Analytical Evaluation Matrix</button>
       <div id="quizErr"></div>
       <div id="quizResult" class="result-container">
-        <div class="no-content-notice"><strong>No Test Active</strong>Generate an automated testing scheme from your source resources.</div>
+        <div class="no-content-notice"><strong>No Active Assessment Target</strong>Load system materials to synthesize a custom examination routine.</div>
       </div>
     </div>
 
     <div id="page-tutor" class="page">
       <div id="tutorArea" style="height: 100%;">
-        <div class="no-content-notice"><strong>Dialogue Environment Locked</strong>Feed source documents to unlock the direct study chat router.</div>
+        <div class="no-content-notice"><strong>Dialogue Environment Locked</strong>Feed source parameters on the left to activate structural chat query frames.</div>
       </div>
     </div>
 
@@ -225,19 +226,14 @@ let inputMode='paste',uploadedFiles=[],quizData=null,quizAnswers={},quizSubmitte
 
 function hasContent(){return inputMode==='paste'?document.getElementById('pasteArea').value.trim().length>=10:uploadedFiles.length>0}
 function updateBtns(){const ok=hasContent();document.getElementById('summaryBtn').disabled=!ok;document.getElementById('quizBtn').disabled=!ok}
-function onPasteInput(){const t=document.getElementById('pasteArea').value.trim();const w=t?t.split(/\s+/).length:0;document.getElementById('wc').textContent=w+' word'+(w!==1?'s':'');updateBtns();tutorBuilt=false}
+function onPasteInput(){const t=document.getElementById('pasteArea').value.trim();const w=t?t.split(/\s+/).length:0;document.getElementById('wc').textContent=w+' word'+(w!==1?'s':'')+' loaded';updateBtns();tutorBuilt=false}
 
 function switchInput(m){
   inputMode = m;
-  
-  // Directly swap tab active states
   document.getElementById('tab-paste').classList.toggle('active', m === 'paste');
   document.getElementById('tab-file').classList.toggle('active', m === 'file');
-  
-  // Directly swap structural layout classes instead of inline displays to bypass z-index collisions
   const pastePanel = document.getElementById('ipaste');
   const filePanel = document.getElementById('ifile');
-  
   if (m === 'paste') {
     pastePanel.classList.add('active');
     filePanel.classList.remove('active');
@@ -245,7 +241,6 @@ function switchInput(m){
     filePanel.classList.add('active');
     pastePanel.classList.remove('active');
   }
-  
   updateBtns();
   tutorBuilt = false;
 }
@@ -274,94 +269,94 @@ async function buildMessages(prompt){
 async function callAI(system,messages){
   const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system,messages})});
   const text=await r.text();let data;
-  try{data=JSON.parse(text)}catch(e){throw new Error('Bad server response')}
-  if(!r.ok)throw new Error(data.error||`Error ${r.status}`);
+  try{data=JSON.parse(text)}catch(e){throw new Error('Incomplete data stream')}
+  if(!r.ok)throw new Error(data.error||`Fault Frame ${r.status}`);
   const raw=data.content.map(c=>c.text||'').join('');
   return raw.replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/\s*```$/,'').trim();
 }
 
 async function doSummary(){
-  clearEl('summaryErr');const btn=document.getElementById('summaryBtn');btn.disabled=true;btn.textContent='⌛ Formulating Expert Study Guide...';
-  loading('summaryResult','Deeply parsing core material...','Extracting detailed theoretical arguments and framework connections');
+  clearEl('summaryErr');const btn=document.getElementById('summaryBtn');btn.disabled=true;btn.textContent='⌛ Processing Literature Analysis...';
+  loading('summaryResult','Deconstructing source components...','Building exhaustive multi-paragraph academic guidance records without constraints');
   try{
-    const sys=`You are an expert master academic research assistant. Respond ONLY with raw JSON — no markdown, no code blocks, no explanation.
+    const sys=`You are a masterful, completely open academic research companion. Respond ONLY with raw JSON — no markdown wrapper blocks, no explanations.
 {
-  "summary": "Provide a masterful, exceptionally thorough and exhaustive multi-paragraph academic review of this text. Break down the core theoretical paradigms, background details, historical nuances, or specialized analytical concepts present. Make it extensive and comprehensive without artificial constraints.",
+  "summary": "Provide an exceptionally thorough, detailed, and highly expansive multi-paragraph literary analysis of the context material. Break down operational variables, theories, structural dependencies, and core conceptual contexts meticulously with no artificial length constraints.",
   "keyPoints": [
-    "Unrestricted, fully articulated key argument or concept 1 detailing deep insights and underlying implications.",
-    "Unrestricted key concept 2 breaking down operational frameworks or structural components..."
+    "Unrestricted, fully fleshed-out key point or structural theme detailing critical sub-components and conceptual dependencies.",
+    "Next extensive core structural concept unpacking analytical metrics, practical implementations, or underlying methodologies..."
   ],
-  "keywords": ["topic1","topic2","topic3","topic4","topic5","topic6"]
+  "keywords": ["framework","variable","paradigm","metrics","concept","analysis"]
 }`;
-    const msgs=await buildMessages('Provide a complete, unrestricted, fully articulated master textbook summary of this text. Cover all structural layers and critical definitions with deep context.');
+    const msgs=await buildMessages('Provide a completely unrestricted, fully fleshed-out analytical textbook guide mapping this information comprehensively. Break down all technical definitions with extended domain context.');
     const raw=await callAI(sys,msgs);
     const d=JSON.parse(raw);lastSummary=d;
     const kp=d.keyPoints.map((p,i)=>`<li class="kp"><span class="kp-n">${i+1}</span><span>${p}</span></li>`).join('');
     const tgs=(d.keywords||[]).map(k=>`<span class="tag">${k}</span>`).join('');
     
     document.getElementById('summaryResult').innerHTML=`
-      <div class="copy-row"><span class="result-title">Master Academic Guide</span><button class="copy-btn" onclick="copySum()">⎘ Copy Guide Data</button></div>
+      <div class="copy-row"><span class="result-title">Master Structural Profile</span><button class="copy-btn" onclick="copySum()">⎘ Copy Workstation Guide</button></div>
       <div class="result-card">
         <div class="block">
-          <div class="block-label">Exhaustive Literature Overview</div>
+          <div class="block-label">Exhaustive Literature Breakdown</div>
           <p class="summary-text">${d.summary}</p>
         </div>
         <div class="block">
           <div class="block-label">Core Structural Concepts</div>
           <ul class="kp-list">${kp}</ul>
         </div>
-        ${tgs?`<div class="block"><div class="block-label">Taxonomy Terms & Keywords</div><div class="tags">${tgs}</div></div>`:''}
+        ${tgs?`<div class="block"><div class="block-label">Taxonomy Vector Terms</div><div class="tags">${tgs}</div></div>`:''}
       </div>`;
-  }catch(e){clearEl('summaryResult');setErr('summaryErr',e.message||'Failed parsing data.')}
-  finally{btn.disabled=false;btn.textContent='✦ Generate Unrestricted Study Guide';updateBtns()}
+  }catch(e){clearEl('summaryResult');setErr('summaryErr',e.message||'Failed data collection.')}
+  finally{btn.disabled=false;btn.textContent='✦ Compile Unrestricted Academic Review';updateBtns()}
 }
 
-function copySum(){if(!lastSummary)return;const t=`OVERVIEW\n${lastSummary.summary}\n\nKEY POINTS\n${lastSummary.keyPoints.map((p,i)=>`${i+1}. ${p}`).join('\n')}\n\nKEY TOPICS\n${(lastSummary.keywords||[]).join(', ')}`;navigator.clipboard.writeText(t).then(()=>{const b=document.querySelector('.copy-btn');if(b){b.textContent='✓ Copied!';setTimeout(()=>b.textContent='⎘ Copy Guide Data',2000)}})}
+function copySum(){if(!lastSummary)return;const t=`OVERVIEW\n${lastSummary.summary}\n\nKEY POINTS\n${lastSummary.keyPoints.map((p,i)=>`${i+1}. ${p}`).join('\n')}\n\nKEYWORDS\n${(lastSummary.keywords||[]).join(', ')}`;navigator.clipboard.writeText(t).then(()=>{const b=document.querySelector('.copy-btn');if(b){b.textContent='✓ Copied!';setTimeout(()=>b.textContent='⎘ Copy Workstation Guide',2000)}})}
 
 async function doQuiz(){
   clearEl('quizErr');quizData=null;quizAnswers={};quizSubmitted=false;
-  const btn=document.getElementById('quizBtn');btn.disabled=true;btn.textContent='⌛ Constructing Assessment Matrix...';
-  loading('quizResult','Evaluating core content dimensions...','Isolating 5 rigorous analytical multiple-choice items');
+  const btn=document.getElementById('quizBtn');btn.disabled=true;btn.textContent='⌛ Processing Assessment Framework...';
+  loading('quizResult','Analyzing resource coordinates...','Compiling 5 comprehensive multiple-choice auditing prompts');
   try{
-    const sys=`You are an expert examination matrix generator. Respond ONLY with a raw JSON array — no markdown, no code blocks, no explanation.
+    const sys=`You are a structural checking assistant. Respond ONLY with a raw JSON array — no markdown blocks, no descriptions.
 [{"question":"...","options":["A. ...","B. ...","C. ...","D. ..."],"answer":0,"explanation":"..."}]
-answer is 0-based index. Generate exactly 5 comprehensive questions.`;
-    const msgs=await buildMessages('Generate a highly technical 5-question multiple choice examination checking deep knowledge points.');
+answer is 0-based index. Synthesize exactly 5 detailed assessment questions.`;
+    const msgs=await buildMessages('Generate 5 comprehensive multiple-choice examination modules analyzing core data trends and arguments.');
     const raw=await callAI(sys,msgs);
     quizData=JSON.parse(raw);renderQuiz();
-  }catch(e){clearEl('quizResult');setErr('quizErr',e.message||'System generation fault.')}
-  finally{btn.disabled=false;btn.textContent='⚡ Build Interactive Examination';updateBtns()}
+  }catch(e){clearEl('quizResult');setErr('quizErr',e.message||'Assessment creation fault.')}
+  finally{btn.disabled=false;btn.textContent='⚡ Initialize Analytical Evaluation Matrix';updateBtns()}
 }
 
 function renderQuiz(){
   if(!quizData)return;
   const letters=['A','B','C','D'];
   let scoreHtml='';
-  if(quizSubmitted){const score=quizData.filter((_,i)=>quizAnswers[i]===quizData[i].answer).length;const pct=Math.round((score/quizData.length)*100);const emoji=pct>=80?'✨':pct>=60?'👍':'📋';scoreHtml=`<div class="score-bar"><div><div class="score-num">${score}/${quizData.length}</div><div class="score-label">Evaluation Matrix Complete</div></div><div style="text-align:right"><span class="score-pct">${emoji} ${pct}% Grade</span><button class="retake-btn" onclick="retakeQuiz()">↺ Reassess</button></div></div>`}
+  if(quizSubmitted){const score=quizData.filter((_,i)=>quizAnswers[i]===quizData[i].answer).length;const pct=Math.round((score/quizData.length)*100);const emoji=pct>=80?'✨':pct>=60?'👍':'📋';scoreHtml=`<div class="score-bar"><div><div class="score-num">${score}/${quizData.length}</div><div class="score-label">Evaluation Routine Cleared</div></div><div style="text-align:right"><span class="score-pct">${emoji} ${pct}% Score Metric</span><button class="retake-btn" onclick="retakeQuiz()">↺ Re-evaluate</button></div></div>`}
   const qs=quizData.map((q,qi)=>{
     const opts=q.options.map((o,oi)=>{let cls='opt';if(quizSubmitted){if(oi===q.answer)cls+=' reveal-correct';else if(quizAnswers[qi]===oi)cls+=' wrong';}else if(quizAnswers[qi]===oi)cls+=' selected';return`<button class="${cls}" onclick="selectOpt(${qi},${oi})" ${quizSubmitted?'disabled':''}><span class="opt-letter">${letters[oi]}</span>${o.replace(/^[A-D]\.\s*/,'')}</button>`}).join('');
-    let indicator='';if(quizSubmitted)indicator=quizAnswers[qi]===q.answer?'<span style="color:var(--success);font-size:12px;font-weight:700">✓ Correct</span>':'<span style="color:var(--danger);font-size:12px;font-weight:700">✗ Deficient</span>';
-    return`<div class="q-card"><div class="q-meta"><span class="q-num">Item Matrix ${qi+1} / ${quizData.length}</span>${indicator}</div><div class="q-text">${q.question}</div><div class="options">${opts}</div>${quizSubmitted?`<div class="explanation">💡 Analytical Breakdown: ${q.explanation}</div>`:''}</div>`;
+    let indicator='';if(quizSubmitted)indicator=quizAnswers[qi]===q.answer?'<span style="color:var(--success);font-size:12px;font-weight:700">✓ Validated</span>':'<span style="color:var(--danger);font-size:12px;font-weight:700">✗ Varied</span>';
+    return`<div class="q-card"><div class="q-meta"><span class="q-num">Evaluation Unit ${qi+1} / ${quizData.length}</span>${indicator}</div><div class="q-text">${q.question}</div><div class="options">${opts}</div>${quizSubmitted?`<div class="explanation">💡 Systematic Analysis: ${q.explanation}</div>`:''}</div>`;
   }).join('');
   const allAnswered=quizData.every((_,i)=>quizAnswers[i]!==undefined);
-  document.getElementById('quizResult').innerHTML=`<div style="height:100%">${scoreHtml}${qs}${!quizSubmitted?`<button class="action-btn" onclick="submitQuiz()" style="margin-top:4px" ${allAnswered?'':'disabled'}>Process Examination Assessment</button>`:''}</div>`;
+  document.getElementById('quizResult').innerHTML=`<div>${scoreHtml}${qs}${!quizSubmitted?`<button class="action-btn" onclick="submitQuiz()" style="margin-top:4px" ${allAnswered?'':'disabled'}>Process Assessment Calculations</button>`:''}</div>`;
 }
 function selectOpt(qi,oi){if(quizSubmitted)return;quizAnswers[qi]=oi;renderQuiz()}
 function submitQuiz(){quizSubmitted=true;renderQuiz()}
 function retakeQuiz(){quizAnswers={};quizSubmitted=false;renderQuiz()}
 
 function renderTutor(){
-  if(!hasContent()){document.getElementById('tutorArea').innerHTML=`<div class="no-content-notice"><strong>Dialogue Environment Locked</strong>Feed source documents to unlock the direct study chat router.</div>`;tutorBuilt=false;return}
+  if(!hasContent()){document.getElementById('tutorArea').innerHTML=`<div class="no-content-notice"><strong>Dialogue Environment Locked</strong>Feed source parameters on the left to activate structural chat query frames.</div>`;tutorBuilt=false;return}
   if(tutorBuilt)return;
   tutorBuilt=true;chatHistory=[];
   document.getElementById('tutorArea').innerHTML=`
     <div class="chat-wrap">
-      <div class="chat-header"><div class="tutor-avatar">✦</div><div><div class="tutor-name">Studify Intelligence Tutor</div><div class="tutor-sub">Active dialogue session linked to documents</div></div></div>
+      <div class="chat-header"><div class="tutor-avatar">✦</div><div><div class="tutor-name">Studify Workstation Companion</div><div class="tutor-sub">Direct query routing line open</div></div></div>
       <div class="chat-messages" id="chatMsgs">
-        <div class="msg bot"><div class="bubble">Materials ingested perfectly. I've completely mapped out the framework arguments. Direct me anywhere you want to drill down deep, parse jargon, or query hidden correlations. 🚀</div><span class="msg-time">now</span></div>
+        <div class="msg bot"><div class="bubble">System parameters mounted successfully. I have fully indexed the source data architecture. Point out any definitions, technical metrics, or specific systemic structures you want broken down. 🚀</div><span class="msg-time">now</span></div>
       </div>
       <div class="chat-input-row">
-        <textarea class="chat-input" id="chatIn" placeholder="Query structural definitions or ask for advanced contextual case derivations..." rows="1" onkeydown="onChatKey(event)"></textarea>
+        <textarea class="chat-input" id="chatIn" placeholder="Query data dependencies or request conceptual breakdown schemas..." rows="1" onkeydown="onChatKey(event)"></textarea>
         <button class="send-btn" id="sendBtn" onclick="sendChat()">➤</button>
       </div>
     </div>`;
@@ -372,11 +367,11 @@ async function sendChat(){
   inp.value='';isSending=true;document.getElementById('sendBtn').disabled=true;
   appendMsg('user',msg);chatHistory.push({role:'user',content:msg});
   const typingId='t'+Date.now();const chatEl=document.getElementById('chatMsgs');
-  chatEl.innerHTML+=`<div class="msg bot" id="${typingId}"><div class="bubble">Tracing correlations...</div></div>`;
+  chatEl.innerHTML+=`<div class="msg bot" id="${typingId}"><div class="bubble">Tracing system linkages...</div></div>`;
   chatEl.scrollTop=chatEl.scrollHeight;
   try{
-    let sys='You are a highly technical, deep academic advisor and study engine. Challenge assumptions, unpack nuances meticulously, and drop brief examples where beneficial.';
-    if(inputMode==='paste'){sys+=`\n\nIngested Text Material:\n${document.getElementById('pasteArea').value.trim()}`;}
+    let sys='You are a rigorous, highly technical academic study system companion. Avoid introductory generic fluff, break down specialized terminology with sharp precision, and leverage descriptive framework layout items.';
+    if(inputMode==='paste'){sys+=`\n\nActive Mounted Context Materials:\n${document.getElementById('pasteArea').value.trim()}`;}
     let apiMsgs;
     if(chatHistory.length===1&&inputMode==='file'&&uploadedFiles.length>0){
       const parts=[];for(const f of uploadedFiles){const ext=f.name.split('.').pop().toLowerCase();if(ext==='txt'){const t=await readTxt(f);parts.push({type:'text',text:`File: ${f.name}\n\n${t}`})}else if(ext==='pdf'){const b=await readB64(f);parts.push({type:'document',source:{type:'base64',media_type:'application/pdf',data:b}})}else{const b=await readB64(f);parts.push({type:'image',source:{type:'base64',media_type:f.type||'image/jpeg',data:b}})}}
@@ -384,12 +379,12 @@ async function sendChat(){
     }else{apiMsgs=chatHistory;}
     const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:sys,messages:apiMsgs})});
     const text=await r.text();let data;
-    try{data=JSON.parse(text)}catch(e){throw new Error('Response stream error')}
-    if(!r.ok)throw new Error(data.error||'Stream fault');
+    try{data=JSON.parse(text)}catch(e){throw new Error('Data processing anomaly')}
+    if(!r.ok)throw new Error(data.error||'Route stream failure');
     const reply=(data.content||[]).map(c=>c.text||'').join('');
     chatHistory.push({role:'assistant',content:reply});
     document.getElementById(typingId)?.remove();appendMsg('bot',reply);
-  }catch(e){document.getElementById(typingId)?.remove();appendMsg('bot','Error processing inquiry: '+e.message);}
+  }catch(e){document.getElementById(typingId)?.remove();appendMsg('bot','Error navigating system parameter: '+e.message);}
   finally{isSending=false;document.getElementById('sendBtn').disabled=false;inp.focus();}
 }
 function appendMsg(role,text){
